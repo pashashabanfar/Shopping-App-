@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>This is the First Template</title>
+    <link rel="stylesheet" href="{% static "css/emp.css"%}">
+</head>
+<body>
+    <h1>Employee Details:</h1>
+    <ol>
+        <li> ID: {{id}} </li>
+        <li> Name: {{name}} </li>
+        <li> Country: {{country}} </li>
+    </ol>
+<img src="{% static "images/me.jpg"%}"/>
+</body>
+</html>
