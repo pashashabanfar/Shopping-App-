@@ -23,5 +23,6 @@ urlpatterns = [
     path('electronics/', views.electronics),
     path('toys/', views.toys),
     path('shoes/', views.shoes),
-    path('employees/', views.displayEmployee)
+    path('employees/', views.displayEmployee, name='displayEmployee'),
+    path('employees/insert/', views.insertEmployee)
 ]

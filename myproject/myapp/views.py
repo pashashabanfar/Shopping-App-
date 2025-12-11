@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime
 from myapp.models import Employee
@@ -34,7 +34,24 @@ def index(request):
 def displayEmployee(request):
     employees = Employee.objects.all()
     empDict = {"employee": employees}
-    return render(request, 'templatesApp/EmployeeTemp.html', empDict)
+    return render(request, 'templatesApp/Employee/EmployeeTemp.html', empDict)
+
+def insertEmployee(request):
+    if request.method == "POST":
+        first_name = request.POST.get("firstName")
+        last_name = request.POST.get("lastName")
+        salary = request.POST.get("salary")
+        email = request.POST.get("email")
+
+
+        Employee.objects.create(
+            firstName = first_name,
+            lastName = last_name,
+            salary = salary,
+            email = email
+        )
+        return redirect('displayEmployee')
+    return render(request, 'templatesApp/Employee/insertEmployeeTemp.html')
 
 
 

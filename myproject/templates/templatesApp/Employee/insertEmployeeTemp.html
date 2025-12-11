@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Employee</title>
+
+    <!-- Vue 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+
+    <!-- Vuetify CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.5.5/dist/vuetify.min.css" rel="stylesheet">
+
+    <!-- Vuetify JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.5.5/dist/vuetify.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f3f4f6;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="app">
+    <v-app>
+
+        <v-main>
+            <v-container class="d-flex justify-center mt-12">
+
+                <v-card width="500" class="pa-6 elevation-4">
+
+                    <h2 class="text-center mb-6">Add New Employee</h2>
+
+                    <!-- Django Form -->
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <v-text-field
+                            label="First Name"
+                            name="firstName"
+                            variant="outlined"
+                            required
+                        ></v-text-field>
+
+                        <v-text-field
+                            label="Last Name"
+                            name="lastName"
+                            variant="outlined"
+                            required
+                        ></v-text-field>
+
+                        <v-text-field
+                            label="Salary"
+                            name="salary"
+                            type="number"
+                            variant="outlined"
+                            required
+                        ></v-text-field>
+
+                        <v-text-field
+                            label="Email"
+                            name="email"
+                            type="email"
+                            variant="outlined"
+                            required
+                        ></v-text-field>
+
+                        <div class="d-flex justify-space-between mt-6">
+
+                            <!-- Back button -->
+                            <v-btn href="/myapp/employees/" variant="outlined" color="grey-darken-1">
+                                Back
+                            </v-btn>
+
+                            <!-- Submit button -->
+                            <v-btn type="submit" color="primary" variant="elevated">
+                                Insert Employee
+                            </v-btn>
+                        </div>
+
+                    </form>
+
+                </v-card>
+
+            </v-container>
+        </v-main>
+
+    </v-app>
+</div>
+
+<script>
+    const { createApp } = Vue
+    const { createVuetify } = Vuetify
+
+    const vuetify = createVuetify()
+    createApp({}).use(vuetify).mount("#app")
+</script>
+
+</body>
+</html>
