@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import datetime
+from myapp.models import Employee
 
 # Create your views here.
 def electronics(request):
@@ -29,3 +30,11 @@ def shoes(request):
 
 def index(request):
     return render(request, 'templatesApp/ShoppingApp/index.html')
+
+def displayEmployee(request):
+    employees = Employee.objects.all()
+    empDict = {"employee": employees}
+    return render(request, 'templatesApp/EmployeeTemp.html', empDict)
+
+
+
