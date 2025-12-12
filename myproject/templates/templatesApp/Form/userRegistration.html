@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <!-- Vue 3 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
+
+    <!-- Vuetify CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.5.5/dist/vuetify.min.css" rel="stylesheet">
+
+    <!-- Vuetify JS -->
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.5.5/dist/vuetify.min.js"></script>
+</head>
+<body class="bg-deep-purple pa-12">
+<div id="app" class="bg-deep-purple pa-12">
+        <v-card class="mx-auto px-6 py-8" max-width="344">
+              <form method="POST">
+                {% csrf_token %}
+            <v-text-field
+              label="First Name"
+              name="firstName"
+              variant="outlined"
+              clearable
+            ></v-text-field>
+
+            <v-text-field
+              label="Last Name"
+              name="lastName"
+              :rules="[required]"
+              variant="outlined"
+              required
+              clearable
+            ></v-text-field>
+
+              <v-text-field
+              label="Email"
+              name="email"
+              :rules="[required]"
+              variant="outlined"
+              required
+              clearable
+            ></v-text-field>
+
+            <v-select
+              label="Gender"
+              name="gender"
+              :rules="[required]"
+              :items="['MALE', 'FEMALE']"
+              variant="outlined"
+              required
+              clearable
+            ></v-select>
+            <br>
+
+            <v-btn type="submit" color="primary" variant="elevated">
+                Sign In
+            </v-btn>
+
+</div>
+
+<script>
+    const { createApp } = Vue
+    const { createVuetify } = Vuetify
+
+    const vuetify = createVuetify()
+    createApp({}).use(vuetify).mount("#app")
+    function required (v) {
+    return !!v || 'Field is required'
+    }
+</script>
+</body>
+</html>

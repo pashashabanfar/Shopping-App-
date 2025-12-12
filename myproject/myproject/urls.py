@@ -18,12 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from templatesApp import views as ta
-
+from myapp import views as ma
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('myapp/', include('myapp.urls')),
     path('quote/', include('quote.urls')),
     path('firstTemplate/', ta.renderTemplate),
-    path('EmployeeInfo/', ta.renderInformation)
+    path('EmployeeInfo/', ta.renderInformation),
+    path('userRegistration/', ma.userRegistrationForm)
 ]

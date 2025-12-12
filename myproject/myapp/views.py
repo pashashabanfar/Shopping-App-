@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime
 from myapp.models import Employee
+from . import forms
 
 # Create your views here.
 def electronics(request):
@@ -52,6 +53,14 @@ def insertEmployee(request):
         )
         return redirect('displayEmployee')
     return render(request, 'templatesApp/Employee/insertEmployeeTemp.html')
+
+def userRegistrationForm(request):
+    form = forms.UserRegistrationForm
+    if request.method == 'POST':
+        userInfo = forms.UserRegistrationForm(request.POST)
+        if userInfo.is_valid():
+            print("First Name: ", userInfo.cleaned_data['firstName'])
+    return render(request, 'templatesApp/Form/userRegistration.html', {'form': form})
 
 
 
