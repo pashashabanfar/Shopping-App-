@@ -24,5 +24,8 @@ urlpatterns = [
     path('toys/', views.toys),
     path('shoes/', views.shoes),
     path('employees/', views.displayEmployee, name='displayEmployee'),
-    path('employees/insert/', views.insertEmployee)
+    path('employees/insert/', views.insertEmployee),
+    path('employees/update/<int:id>/', views.updateEmployee),
+    path('employees/delete/<int:id>/', views.deleteEmployee)
+
 ]

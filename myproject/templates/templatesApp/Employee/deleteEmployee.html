@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Employee</title>
+
+    <!-- Vuetify CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.5.5/dist/vuetify.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f3f4f6;
+            font-family: Arial, sans-serif;
+        }
+        .box {
+            max-width: 500px;
+            margin: 100px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .danger {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .delete {
+            background-color: #d32f2f;
+            color: white;
+        }
+        .cancel {
+            background-color: #9e9e9e;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2 class="danger">Delete Employee</h2>
+
+    <p>
+        Are you sure you want to delete
+        <strong>{{ employee.firstName }} {{ employee.lastName }}</strong>?
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="delete">Yes</button>
+        <a href="/myapp/employees/" class="cancel" style="padding: 10px 20px; text-decoration: none;">No</a>
+    </form>
+</div>
+
+</body>
+</html>

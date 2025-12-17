@@ -6,6 +6,9 @@
 
     <!-- Vuetify CSS only for styling -->
     <link href="https://cdn.jsdelivr.net/npm/vuetify@3.5.5/dist/vuetify.min.css" rel="stylesheet">
+    <!-- Material Design Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" rel="stylesheet">
+
 
     <style>
         body {
@@ -52,6 +55,7 @@
                 <th>Last Name</th>
                 <th>Salary</th>
                 <th>Email</th>
+                <th>Update/Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -61,6 +65,24 @@
                 <td>{{ emp.lastName }}</td>
                 <td>{{ emp.salary }}</td>
                 <td>{{ emp.email }}</td>
+                <td style="text-align: center;">
+
+                    <!-- Update -->
+                    <a href="/myapp/employees/update/{{ emp.id }}/"
+                       title="Update"
+                       style="margin-right: 12px; color: #1976d2; text-decoration: none;">
+                        <i class="mdi mdi-pencil"></i>
+                    </a>
+
+                    <!-- Delete -->
+                    <a href="/myapp/employees/delete/{{ emp.id }}/"
+                       title="Delete"
+                       style="color: #d32f2f; text-decoration: none;"
+                       onclick="return confirm('Are you sure you want to delete this employee?');">
+                        <i class="mdi mdi-delete"></i>
+                    </a>
+
+                </td>
             </tr>
             {% empty %}
             <tr>

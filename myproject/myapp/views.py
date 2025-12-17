@@ -54,6 +54,29 @@ def insertEmployee(request):
         return redirect('displayEmployee')
     return render(request, 'templatesApp/Employee/insertEmployeeTemp.html')
 
+def updateEmployee(request, id):
+    target_customer = Employee.objects.get(id=id)
+    if request.method == 'POST':
+        target_customer.firstName = request.POST.get("firstName")
+        target_customer.lastName = request.POST.get("lastName")
+        target_customer.salary = request.POST.get("salary")
+        target_customer.email = request.POST.get("email")
+
+        target_customer.save()
+        return redirect('displayEmployee')
+
+    return render(
+        request,
+        'templatesApp/Employee/updateEmployee.html',
+        {'employee': target_customer}
+    )
+def deleteEmployee(request, id):
+    target_customer = Employee.objects.get(id = id)
+    if request.method == 'POST':
+        target_customer.delete()
+        return redirect('displayEmployee')
+    return render(request, 'templatesApp/Employee/deleteEmployee.html', {'employee': target_customer})
+
 def userRegistrationForm(request):
     form = forms.UserRegistrationForm
     if request.method == 'POST':
