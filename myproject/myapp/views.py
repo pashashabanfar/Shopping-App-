@@ -3,8 +3,10 @@ from django.http import HttpResponse
 import datetime
 from myapp.models import Employee
 from . import forms
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def electronics(request):
     elec_products = {
         "Product1": "Mac",
@@ -13,6 +15,7 @@ def electronics(request):
     }
     return render(request, 'templatesApp/ShoppingApp/product.html', context=elec_products)
 
+@login_required
 def toys(request):
     toy_products = {
         "Product1": "Remote Car",
@@ -21,6 +24,7 @@ def toys(request):
     }
     return render(request, 'templatesApp/ShoppingApp/product.html', context=toy_products)
 
+@login_required
 def shoes(request):
     shoe_products = {
         "Product1": "Nike",
@@ -29,14 +33,17 @@ def shoes(request):
     }
     return render(request, 'templatesApp/ShoppingApp/product.html', context=shoe_products)
 
+@login_required
 def index(request):
     return render(request, 'templatesApp/ShoppingApp/index.html')
 
+@login_required
 def displayEmployee(request):
     employees = Employee.objects.all()
     empDict = {"employee": employees}
     return render(request, 'templatesApp/Employee/EmployeeTemp.html', empDict)
 
+@login_required
 def insertEmployee(request):
     if request.method == "POST":
         first_name = request.POST.get("firstName")
@@ -54,6 +61,7 @@ def insertEmployee(request):
         return redirect('displayEmployee')
     return render(request, 'templatesApp/Employee/insertEmployeeTemp.html')
 
+@login_required
 def updateEmployee(request, id):
     target_customer = Employee.objects.get(id=id)
     if request.method == 'POST':
@@ -70,6 +78,9 @@ def updateEmployee(request, id):
         'templatesApp/Employee/updateEmployee.html',
         {'employee': target_customer}
     )
+
+
+@login_required
 def deleteEmployee(request, id):
     target_customer = Employee.objects.get(id = id)
     if request.method == 'POST':
@@ -77,6 +88,8 @@ def deleteEmployee(request, id):
         return redirect('displayEmployee')
     return render(request, 'templatesApp/Employee/deleteEmployee.html', {'employee': target_customer})
 
+
+@login_required
 def userRegistrationForm(request):
     form = forms.UserRegistrationForm
     if request.method == 'POST':
