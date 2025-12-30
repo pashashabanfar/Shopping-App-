@@ -17,12 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from templatesApp import views as ta
-from myapp import views as ma
+from myapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('myapp/', include('myapp.urls')),
-    path('userRegistration/', ma.userRegistrationForm),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('userRegistration/', views.userRegistrationForm),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('signup/', views.signup_view, name='signup')
 ]

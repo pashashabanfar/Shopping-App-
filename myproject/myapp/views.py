@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime
+from django.contrib.auth.models import User
+from django.contrib.auth import login
+from .forms import SignupForm, ProfileForm
 from myapp.models import Employee
 from . import forms
 from django.contrib.auth.decorators import login_required
+from myapp.models import Profile
 
 # Create your views here.
 @login_required
@@ -98,5 +102,27 @@ def userRegistrationForm(request):
             print("First Name: ", userInfo.cleaned_data['firstName'])
     return render(request, 'templatesApp/Form/userRegistration.html', {'form': form})
 
+def signup_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        age = request.POST['age']
+        gender = request.POST['gender']
 
+        user = User.objects.create_user(
+            username = username,
+            password = password,
+            first_name = first_name,
+            last_name = last_name,
 
+        )
+        Profile.objects.create(
+            name=user,
+            gender=gender,
+            age=age
+        )
+        return redirect("login")
+
+    return render(request, "registration/signup.html")

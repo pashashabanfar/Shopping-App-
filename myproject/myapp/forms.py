@@ -1,7 +1,15 @@
 from django import forms
-class UserRegistrationForm(forms.Form):
-    GENDER_OPTIONS = ["MALE", "FEMALE"]
-    firstName = forms.CharField(required=False)
-    lastName = forms.CharField()
-    email = forms.CharField()
-    gender = forms.CharField(widget=forms.Select(choices=GENDER_OPTIONS))
+from django.contrib.auth.models import User
+from .models import Profile
+
+class SignupForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'password']
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['gender', 'age']
